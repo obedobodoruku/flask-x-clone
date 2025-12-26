@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="my-6">
+        <h1 class="text-center text-3xl font-bold mb-7">Feed</h1>
+    {% if posts %}
+        {% for post in posts %}
+            {% if current_user.is_authenticated %}
+            <div class="border border-black p-4">
+                    <div>
+                        <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                        <h4>
+                            <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
+                                <div class="flex gap-2 items-center">
+                                    <h5>{{ post.user.name }}</h5>
+                                    <small class="font-light text-[1rem] underline">@{{ post.user.username }}</small>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}">
+                    <div class="my-3">
+                        <p class="text-[1.7rem]">{{ post.content }}</p>
+                    </div>
+                
+                    <div>
+                        <span>
+                            on {{ post.date_posted.strftime('%Y-%m-%d') }}
+                        </span>
+                    </div>
+                </a>
+                
+            </div>
+                {% else %}
+                <div class="border border-black p-4">
+                    <div>
+                        <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                        <div class="flex gap-2 items-center">
+                            <h5 class="text-xl font-medium">{{ post.user.name }}</h5>
+                            <small class="font-light text-[1rem] underline">@{{ post.user.username }}</small>
+                        </div>
+                    </div>
+                    <div class="my-3">
+                        <p class="text-[1.7rem]">{{ post.content }}</p>
+                    </div>
+                
+                <div>
+                    <span>
+                        on {{ post.date_posted.strftime('%Y-%m-%d') }}
+                    </span>
+                </div>
+                </div>
+            
+                {% endif %}
+                
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

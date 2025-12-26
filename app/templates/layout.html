@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='dist/output.css') }}" rel="stylesheet">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% endif %}
+</head>
+<body>
+    <header class="top-0 sticky">
+        <nav class="flex items-center justify-between bg-blue-500 text-white py-4 px-2 border border-b-black">
+            <div class="text-2xl font-extrabold">App</div>
+            {% if current_user.is_authenticated %}
+                <ul class="flex items-center justify-center gap-4 font-bold">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('account') }}">Profile</a></li>
+                <li><a href="{{ url_for('create_post') }}">Create Post</a></li>
+                <li><a href="{{ url_for('logout') }}">logout</a></li>
+            </ul>
+            {% else %}
+                <ul class="flex items-center justify-center gap-4">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+            {% endif %}
+            
+        </nav>
+    </header>
+    <div class="px-4">
+        <div>
+            {% with messages=get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="bg-green-200 p-4 rounded-xl my-3">
+                            <span class="text-center text-green-800 font-bold">{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>

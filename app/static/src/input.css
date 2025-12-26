@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+.form-field {
+    box-shadow: 2px 3px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-field > label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    .form-div {
+        height: 100vh;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    .form-field {
+        width: 100%;
+    }
+}

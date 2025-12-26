@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block body %}
+    
+    <div class="form-div flex flex-col items-center justify-center"> 
+        <h1 class="mb-6 mt-3 text-[1.3rem]"><span class="text-2xl font-bold mb-3">{{ current_user.username }}'s</span> Account</h1>
+        <form class="form" method="post" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-field w-[600px] p-4 rounded-xl">
+                <legend class="text-3xl font-bold">Update Your Account</legend>
+                {{ form.username.label }}
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <div class="my-3">
+                            {{ form.username(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                        </div>
+                        <div>
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="my-3">
+                        {{ form.username(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                    </div>
+                {% endif %}
+
+                {{ form.name.label }}
+                {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                        <div class="my-3">
+                            {{ form.name(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                        </div>
+                        <div>
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="my-3">
+                        {{ form.name(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                    </div>
+                {% endif %}
+
+                {{ form.email.label }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <div class="my-3">
+                            {{ form.email(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                        </div>
+                        <div>
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="my-3">
+                        {{ form.email(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                    </div>
+                {% endif %}
+                
+                <div class="flex items-center gap-4 mt-6 mb-2">
+                    <div>
+                        {{ form.submit(class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]") }}
+                    </div>
+                    <div>
+                        <a href="{{ url_for('account') }}">
+                            <button type="button" class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]">
+                                Cancel
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
