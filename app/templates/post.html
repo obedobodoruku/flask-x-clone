@@ -103,6 +103,15 @@
                                 on {{ reply.date_posted.strftime('%Y-%m-%d') }}
                             </span>
                         </div>
+
+                        {% if reply.user == current_user %}
+                            <a href="{{ url_for('update_reply',post_id=post.id, reply_id=reply.id) }}">
+                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Update</button>
+                            </a>
+                            <a href="{{ url_for('delete_reply', post_id=post.id, reply_id=reply.id) }}">
+                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Delete</button>
+                            </a>
+                        {% endif %}
                     </a>
                 
                 </div>

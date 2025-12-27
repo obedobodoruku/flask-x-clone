@@ -58,3 +58,7 @@ class UpdateAccountForm(FlaskForm):
 class UpdatePostForm(FlaskForm):
     content = TextAreaField("Content", validators=[DataRequired()])
     submit = SubmitField("Reply")
+
+class UpdateReplyForm(FlaskForm):
+    content = TextAreaField("Content")
+    submit = SubmitField("Update")

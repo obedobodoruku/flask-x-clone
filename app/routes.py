@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, url_for, flash
 from app import app, bcrypt
 from app.models import db, User, Post, Reply
 from datetime import datetime
-from app.forms import RegistrationForm, LoginForm, CreatePostForm, UpdateAccountForm, ReplyForm, UpdatePostForm
+from app.forms import RegistrationForm, LoginForm, CreatePostForm, UpdateAccountForm, ReplyForm, UpdatePostForm, UpdateReplyForm
 from flask_login import login_required, login_user, logout_user ,current_user
 
 @app.route("/", methods=["GET", "POST"])
@@ -125,3 +125,23 @@ def update_post(post_id):
     return render_template("update_post.html",post=post, form=form, title=f"Post {post.id} Update")
 
     
+@app.route("/<int:post_id>/delete_reply/<int:reply_id>", methods=["GET"])
+def delete_reply(post_id, reply_id):
+    post = Post.query.get_or_404(post_id)
+    reply = Reply.query.get_or_404(reply_id)
+    db.session.delete(reply)
+    db.session.commit()
+    return redirect(url_for("view_post", username=post.user.username, post_id=post.id, reply_id=reply.id))
+
+@app.route("/<int:post_id>/update_reply/<int:reply_id>", methods=["GET", "POST"])
+def update_reply(post_id, reply_id):
+    post = Post.query.get_or_404(post_id)
+    reply = Reply.query.get_or_404(reply_id)
+    form = UpdateReplyForm()
+    if form.validate_on_submit():
+        reply.content = form.content.data
+        db.session.commit()
+        return redirect(url_for("view_post",username=post.user.username, post_id=post.id))
+    elif request.method == "GET":
+        form.content.data = reply.content
+    return render_template("update_reply.html", post=post, reply=reply, form=form, title=f"{reply.user.username}'s reply {reply.id} Update")
