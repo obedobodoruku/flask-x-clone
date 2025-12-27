@@ -9,8 +9,8 @@
     {% endif %}
 </head>
 <body>
-    <header class="top-0 sticky">
-        <nav class="flex items-center justify-between bg-blue-500 text-white py-4 px-2 border border-b-black">
+    <header class="top-0 sticky backdrop-blur-3xl">
+        <nav class="flex items-center justify-between bg-blue-500 text-white py-4 px-2">
             <div class="text-2xl font-extrabold">App</div>
             {% if current_user.is_authenticated %}
                 <ul class="flex items-center justify-center gap-4 font-bold">
