@@ -9,12 +9,15 @@
                     <div>
                         <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
                         <h4>
-                            <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
-                                <div class="flex gap-2 items-center">
+                            <div class="flex gap-2 items-center">
+                                <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
                                     <h5>{{ post.user.name }}</h5>
+                                 </a>
+                                 <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
                                     <small class="font-light text-[1rem] underline">@{{ post.user.username }}</small>
-                                </div>
-                            </a>
+                                    
+                                 </a>
+                            </div>
                         </h4>
                     </div>
                 <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}">
