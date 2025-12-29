@@ -145,3 +145,10 @@ def update_reply(post_id, reply_id):
     elif request.method == "GET":
         form.content.data = reply.content
     return render_template("update_reply.html", post=post, reply=reply, form=form, title=f"{reply.user.username}'s reply {reply.id} Update")
+
+@app.route("/posts/<int:post_id>/reply/<int:reply_id>", methods=["GET", "POST"])
+def view_reply(post_id, reply_id):
+    form = ReplyForm()
+    post = Post.query.get_or_404(post_id)
+    reply = Reply.query.filter_by(id=reply_id, post_id=post_id).first_or_404()
+    return render_template("reply.html", post=post, reply=reply, form=form)

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="mt-7">
+        {% if reply %}
+                
+            <div class="border-2 border-black p-4">
+            <div>
+                <img src="{{ reply.user.avatar(36) }}" alt="user pfp" />
+                <h4>
+                    <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
+                        <div class="flex gap-2 items-center">
+                            <h5>{{ reply.user.name }}</h5>
+                            <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
+                        </div>
+                    </a>
+                </h4>
+                </div>
+
+            <div class="my-3">
+                <p class="text-[1.7rem]">{{ reply.content }}</p>
+            </div>
+            
+            <div>
+                <span>
+                    on {{ reply.date_posted.strftime('%Y-%m-%d') }}
+                </span>
+            </div>
+            <div>
+                <form method="post" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <div>
+                            {{ form.content(class="bg-gray-200 border border-gray-300 px-4 py-2 w-full rounded-xl") }}
+                        </div>
+                        <div>
+                            {{ form.submit(class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]") }}
+                    </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-4">
+                    <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}"
+                    class="text-blue-600 text-[1.2rem] font-bold underline">
+                        ← Back to post
+                    </a>
+                
+                </div>
+
+            </div>
+        {% else %}
+            <p class="text-center">Reply not found.</p>
+
+                        
+        {% endif %}
+    </div>
+{% endblock %}

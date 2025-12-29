@@ -3,7 +3,7 @@
     <div class="mt-7">
         {% if post %}
             {% if post.user == current_user %}
-                 <div class="border border-black p-4">
+                 <div class="border-2 border-black p-4">
                 <div>
                     <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
                     <h4>
@@ -16,7 +16,7 @@
                     </h4>
                     </div>
                 <div class="my-3">
-                    <p class="text-[1.7rem]">{{ post.content }}</p>
+                    <p class="text-[1.2rem]">{{ post.content }}</p>
                 </div>
                 
                 <div>
@@ -39,7 +39,7 @@
                     </div>
                 </div> 
             {% else %}
-                <div class="border border-black p-4">
+                <div class="border-2 border-black p-4">
                 <div>
                     <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
                     <h4>
@@ -52,7 +52,7 @@
                     </h4>
                     </div>
                 <div class="my-3">
-                    <p class="text-[1.7rem]">{{ post.content }}</p>
+                    <p class="text-[1.2rem]">{{ post.content }}</p>
                 </div>
                 
                 <div>
@@ -78,43 +78,85 @@
                     </form>
                 </div>
             </div>
+
             <h4 class="text-2xl text-center font-bold mt-7">Replies</h4>
             {% if replies %}
                 {% for reply in replies %}
-                <div class="border border-black p-4 my-7">
-                    <div>
-                        <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
-                        <h4>
-                            <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
-                                <div class="flex gap-2 items-center">
-                                    <h5>{{ reply.user.name }}</h5>
-                                    <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
-                                </div>
-                            </a>
-                        </h4>
-                    </div>
-                    <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}">
-                        <div class="my-3">
-                            <p class="text-[1.7rem]">{{ reply.content }}</p>
-                        </div>
-                    
-                        <div>
-                            <span>
-                                on {{ reply.date_posted.strftime('%Y-%m-%d') }}
-                            </span>
-                        </div>
-
-                        {% if reply.user == current_user %}
-                            <a href="{{ url_for('update_reply',post_id=post.id, reply_id=reply.id) }}">
-                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Update</button>
-                            </a>
-                            <a href="{{ url_for('delete_reply', post_id=post.id, reply_id=reply.id) }}">
-                                <button class="bg-red-500 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Delete</button>
-                            </a>
-                        {% endif %}
-                    </a>
                 
-                </div>
+                            {% if reply.user == current_user %}
+                                <div class="border-2 border-black p-4 my-7 w-full">
+                                <div>
+                                    <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                                    <h4>
+                                        <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=reply.user.username) }}">
+                                            <div class="flex gap-2 items-center">
+                                                <h5>{{ reply.user.name }}</h5>
+                                                <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
+                                            </div>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <a href="{{ url_for('view_post', post_id=post.id, username=reply.user.username) }}">
+                                    <div class="my-3">
+                                        <p class="text-[1.2rem]">{{ reply.content }}</p>
+                                    </div>
+                                
+                                    <div>
+                                        <span>
+                                            on {{ reply.date_posted.strftime('%Y-%m-%d') }}
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center gap-4">
+                                        <div class="my-5">
+                                            <a href="{{ url_for('update_reply',post_id=post.id, reply_id=reply.id) }}">
+                                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Update</button>
+                                            </a>
+                                        </div>
+                                        <div class="my-5">
+                                            <a href="{{ url_for('delete_reply', post_id=post.id, reply_id=reply.id) }}">
+                                                <button class="bg-red-500 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Delete</button>
+                                            </a>
+                                        </div>
+                                </div>
+                                </a>
+                                </div>
+                            {% else %}
+                                
+                                
+                                    <div onclick="window.location.href='{{ url_for('view_reply', post_id=post.id, reply_id=reply.id) }}'"  class="border-2 border-black p-4 my-7 w-full">
+                                        <div>
+                                            <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                                            <a>
+                                                
+                                                    <div class="flex gap-2 items-center">
+                                                        <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=reply.user.username) }}">
+                                                            <h5>{{ reply.user.name }}</h5>
+                                                            <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
+                                                        </a>
+                                                    </div>
+                                                
+                                            </h4>
+                                        </div>
+                                        
+                                            <div class="my-3">
+                                                <p class="text-[1.2rem]">{{ reply.content }}</p>
+                                            </div>
+                                        
+                                            <div>
+                                                <span>
+                                                    on {{ reply.date_posted.strftime('%Y-%m-%d') }}
+                                                </span>
+                                            </div>
+                                    </div>
+                                            
+                                    
+                                
+                            {% endif %}
+                        
+                    
+                    
+                
                 {% endfor %}
             {% else %}
                 <p class="text-center">No Replies yet.</p>

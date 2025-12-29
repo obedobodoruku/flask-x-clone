@@ -5,36 +5,36 @@
     {% if posts %}
         {% for post in posts %}
             {% if current_user.is_authenticated %}
-            <div class="border border-black p-4">
-                    <div>
-                        <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
-                        <h4>
-                            <div class="flex gap-2 items-center">
-                                <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
-                                    <h5>{{ post.user.name }}</h5>
-                                 </a>
-                                 <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
-                                    <small class="font-light text-[1rem] underline">@{{ post.user.username }}</small>
-                                    
-                                 </a>
-                            </div>
-                        </h4>
-                    </div>
-                <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}">
-                    <div class="my-3">
-                        <p class="text-[1.7rem]">{{ post.content }}</p>
-                    </div>
-                
-                    <div>
-                        <span>
-                            on {{ post.date_posted.strftime('%Y-%m-%d') }}
-                        </span>
-                    </div>
-                </a>
-                
-            </div>
-                {% else %}
-                <div class="border border-black p-4">
+                <div class="post-div p-4 mb-4">
+                        <div>
+                            <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                            <h4>
+                                <div class="flex gap-2 items-center">
+                                    <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
+                                        <h5>{{ post.user.name }}</h5>
+                                    </a>
+                                    <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=post.user.username) }}">
+                                        <small class="font-light text-[1rem] underline">@{{ post.user.username }}</small>
+                                        
+                                    </a>
+                                </div>
+                            </h4>
+                        </div>
+                    <a href="{{ url_for('view_post', post_id=post.id, username=post.user.username) }}">
+                        <div class="my-3">
+                            <p class="text-[1.2rem]">{{ post.content }}</p>
+                        </div>
+                    
+                        <div>
+                            <span>
+                                on {{ post.date_posted.strftime('%Y-%m-%d') }}
+                            </span>
+                        </div>
+                    </a>
+                    
+                </div>
+            {% else %}
+                <div class="border border-black p-4 mb-4">
                     <div>
                         <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
                         <div class="flex gap-2 items-center">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="my-3">
-                        <p class="text-[1.7rem]">{{ post.content }}</p>
+                        <p class="text-[1.2rem]">{{ post.content }}</p>
                     </div>
                 
                 <div>
