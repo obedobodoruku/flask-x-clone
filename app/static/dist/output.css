@@ -253,6 +253,12 @@
   .h-\[400px\] {
     height: 400px;
   }
+  .w-\[10px\] {
+    width: 10px;
+  }
+  .w-\[120px\] {
+    width: 120px;
+  }
   .w-\[150px\] {
     width: 150px;
   }
@@ -297,14 +303,6 @@
     border-width: 1px;
   }
   .border-2 {
-    border-style: var(--tw-border-style);
-    border-width: 2px;
-  }
-  .border-\[2\] {
-    border-style: var(--tw-border-style);
-    border-width: 2;
-  }
-  .border-\[2px\] {
     border-style: var(--tw-border-style);
     border-width: 2px;
   }

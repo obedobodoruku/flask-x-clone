@@ -28,13 +28,13 @@
                 <div class="flex items-center gap-4">
                     <div class="my-5">
                         <a href="{{ url_for('update_post', post_id=post.id) }}">
-                            <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Update</button>
+                            <button class="bg-blue-700 text-white font-bold p-[7px] w-[120px] rounded-[7px]" type="button">Update</button>
                         </a>
                     </div> 
 
                     <div class="my-5">
                         <a href="{{ url_for('delete_post', post_id=post.id) }}">
-                            <button class="bg-red-500 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Delete</button>
+                            <button class="bg-red-500 text-white font-bold p-[7px] w-[120px] rounded-[7px]" type="button">Delete</button>
                         </a>
                     </div>
                 </div> 
@@ -84,19 +84,19 @@
                 {% for reply in replies %}
                 
                             {% if reply.user == current_user %}
-                                <div class="border-2 border-black p-4 my-7 w-full">
-                                <div>
-                                    <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
-                                    <h4>
-                                        <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=reply.user.username) }}">
-                                            <div class="flex gap-2 items-center">
-                                                <h5>{{ reply.user.name }}</h5>
-                                                <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
-                                            </div>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <a href="{{ url_for('view_post', post_id=post.id, username=reply.user.username) }}">
+                                <div class="border-2 border-black p-4 my-7">
+                                    <div>
+                                        <img src="{{ post.user.avatar(36) }}" alt="user pfp" />
+                                        <h4>
+                                            <a class="text-2xl font-bold" style="cursor: pointer;" href="{{ url_for('user_posts', username=reply.user.username) }}">
+                                                <div class="flex gap-2 items-center">
+                                                    <h5>{{ reply.user.name }}</h5>
+                                                    <small class="font-light text-[1rem] underline">@{{ reply.user.username }}</small>
+                                                </div>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <a href="{{ url_for('view_post', post_id=post.id, username=reply.user.username) }}">
                                     <div class="my-3">
                                         <p class="text-[1.2rem]">{{ reply.content }}</p>
                                     </div>
@@ -107,19 +107,19 @@
                                         </span>
                                     </div>
 
+                                    </a>
                                     <div class="flex items-center gap-4">
                                         <div class="my-5">
                                             <a href="{{ url_for('update_reply',post_id=post.id, reply_id=reply.id) }}">
-                                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Update</button>
+                                                <button class="bg-blue-700 text-white font-bold p-[7px] w-[120px] rounded-[7px]" type="button">Update</button>
                                             </a>
                                         </div>
                                         <div class="my-5">
                                             <a href="{{ url_for('delete_reply', post_id=post.id, reply_id=reply.id) }}">
-                                                <button class="bg-red-500 text-white font-bold p-[7px] w-[150px] rounded-[7px]" type="button">Delete</button>
+                                                <button class="bg-red-500 text-white font-bold p-[7px] w-[120px] rounded-[7px]" type="button">Delete</button>
                                             </a>
                                         </div>
-                                </div>
-                                </a>
+                                    </div>
                                 </div>
                             {% else %}
                                 
