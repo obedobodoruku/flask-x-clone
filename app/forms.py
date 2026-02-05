@@ -12,12 +12,12 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
     submit = SubmitField("Sign Up")
 
-    def check_username(self, username):
+    def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError("This username is already taken")
         
-    def check_email(self, email):
+    def validate_email(self, email):
         email = User.query.filter_by(email=email.data).first()
         if email:
             raise ValidationError("This email is already taken")
@@ -43,13 +43,13 @@ class UpdateAccountForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired(), Email()])
     submit = SubmitField("Update")
 
-    def check_username(self, username):
+    def validate_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError("This username is already taken")
         
-    def check_email(self, email):
+    def validate_email(self, email):
         if email.data != current_user.email:
             email = User.query.filter_by(email=email.data).first()
         if email:
