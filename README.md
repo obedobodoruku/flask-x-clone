@@ -3,7 +3,7 @@ A mini social media platform built with Flask, HTML and tailwindcss
 # Features
 - User registration and login
 - Secure authentication with sessions
-- Create, edite, and delete posts
+- Create, edit, and delete posts
 - Reply to posts
 - User-based permissions (only users can edit/delete their own posts and replies)
 - Clean and simple UI
